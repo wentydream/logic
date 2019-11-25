@@ -1,0 +1,38 @@
+/*             
+             有一组不同高度的台阶，有一个整数数组表示，数组中每个数是台阶的高度，当开始下雨了（雨水足够多）台阶之间的水坑会积水多少呢？
+             如下图，可以表示为数组[0,1,0,2,1,0,1,3,2,1,2,1]，返回积水量6。
+             */
+            int[] num = { 0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1 };
+            int nums = 0;//最终结果
+            int max = num.Max();//最大值，忽略重复
+            int left_status = 0;//左侧依次最大值
+            int right_status = 0;//右侧依次最大值
+            int left_index = 0;//左侧依次递增索引值
+            int right_index = num.Length - 1;//右侧依次递减索引值
+            while (left_index < right_index)
+            {
+                if (num[left_index] != max)
+                {
+                    if (left_status < num[left_index])
+                    {
+                        left_status = num[left_index];
+                    }
+                    else
+                    {
+                        nums += left_status - num[left_index];
+                    }
+                    left_index++;
+                }
+                else
+                {
+                    if (right_status < num[right_index])
+                    {
+                        right_status = num[right_index];
+                    }
+                    else
+                    {
+                        nums += right_status - num[right_index];
+                    }
+                    right_index--;
+                }
+            }
